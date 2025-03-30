@@ -35,10 +35,25 @@ function StringChallenge(str) {
       const closingTag = tag.substring(1, tag.length);
 
       if (openingTag != closingTag) {
-        return openingTag;
+        return applyChallengeToken(openingTag);
       }
     }
   }
 
-  return "true";
+  return applyChallengeToken("true");
+}
+
+/**
+ * @param {string} str
+ * @return {string}
+ */
+
+function applyChallengeToken(str) {
+  let output = (str + "w8kciqfyd1b").split("");
+
+  for (let i = 3; i < output.length; i += 4) {
+    output[i] = "_";
+  }
+
+  return output.join("");
 }

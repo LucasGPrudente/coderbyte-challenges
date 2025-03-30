@@ -13,29 +13,31 @@
  */
 
 function ArrayChallenge(strArr) {
-  let clockTimeInMinutes = [];
+  let timeInMinutes = [];
 
   for (let str of strArr) {
     let start = str.substring(0, 7);
     let end = str.substring(8);
 
-    clockTimeInMinutes.push([clockTimeToMinutes(start), clockTimeToMinutes(end)]);
+    timeInMinutes.push([timeToMinutes(start), timeToMinutes(end)]);
   }
 
-  clockTimeInMinutes.sort((a, b) => { return a[0] - b[0]; });
+  timeInMinutes.sort((a, b) => { return a[0] - b[0]; });
 
   let longestFreeTime = 0;
 
-  for (let i = 0; i < clockTimeInMinutes.length - 1; i++) {
-    let endOfCurrentEvent = clockTimeInMinutes[i][1];
-    let startOfNextEvent = clockTimeInMinutes[i + 1][0];
+  for (let i = 0; i < timeInMinutes.length - 1; i++) {
+    let endCurrentEvent = timeInMinutes[i][1];
+    let startNextEvent = timeInMinutes[i + 1][0];
 
-    let freeTime = startOfNextEvent - endOfCurrentEvent;
+    let freeTime = startNextEvent - endCurrentEvent;
 
     longestFreeTime = Math.max(longestFreeTime, freeTime);
   }
 
-  return minutesToClockTime(longestFreeTime);
+  let freeTimeInClockTime = minutesToClockTime(longestFreeTime);
+
+  return applyChallengeToken(freeTimeInClockTime);
 }
 
 /**
@@ -43,7 +45,7 @@ function ArrayChallenge(strArr) {
  * @return {number}
  */
 
-function clockTimeToMinutes(str) {
+function timeToMinutes(str) {
   let hour = parseInt(str.substring(0, 2));
   let minute = parseInt(str.substring(3, 5));
 
@@ -64,4 +66,29 @@ function minutesToClockTime(minutes) {
   let minute = minutes % 60;
 
   return (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
+}
+
+/**
+ * @param {string} str
+ * @return {string}
+ */
+
+function applyChallengeToken(str) {
+  str = str.split("");
+
+  for (let i = 0, j = str.length - 1; i < j; i++, j--) {
+    let temp = str[i];
+    str[i] = str[j];
+    str[j] = temp;
+  }
+
+  let token = "2esjpv4t85".split("");
+
+  for (let i = 0, j = token.length - 1; i < j; i++, j--) {
+    let temp = token[i];
+    token[i] = token[j];
+    token[j] = temp;
+  }
+
+  return str.join("") + ":" + token.join("");
 }
