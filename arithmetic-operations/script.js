@@ -1,18 +1,7 @@
 /**
- *  Test inputs:
- *
- *  console.log(StringChallenge("onezeropluseight"))
- *  console.log(StringChallenge("oneminusoneone"))
- *  console.log(StringChallenge("oneplusone"))
- *  console.log(StringChallenge("threeminusonezeroplusseven"))
- *
- */
-
-/**
  * @param {string} str
  * @return {string}
  */
-
 function StringChallenge(str) {
   const wordToChar = {
     "zero": "0",
@@ -83,20 +72,5 @@ function StringChallenge(str) {
     resultDigits += charToWord[caractere];
   }
 
-  return applyChallengeToken(resultDigits);
-}
-
-/**
- * @param {string} str
- * @return {string}
- */
-
-function applyChallengeToken(str) {
-  let output = (str + "w8kciqfyd1b").split("");
-
-  for (let i = 3; i < output.length; i += 4) {
-    output[i] = "_";
-  }
-
-  return output.join("");
+  return resultDigits;
 }
