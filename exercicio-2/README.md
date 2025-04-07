@@ -1,4 +1,4 @@
-## Exercício 2
+## Exercício 2 :)
 
 <code> Médio </code> <code> Desafio de Matriz </code>
 
